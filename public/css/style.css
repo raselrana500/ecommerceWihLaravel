@@ -1,0 +1,35 @@
+.mr-auto,.mx-auto {
+    margin-right: auto!important;
+    margin-top: 14px;
+}
+
+.margin-top-20{
+    margin-top: 20px;
+}
+
+.featured-img{
+    min-height: 200px;
+}
+
+.margin-bottom-10{
+    margin-bottom: 10px;
+}
+
+.bg h3{
+    background-color: #00ffff;
+    color:black;
+    padding: 5px;
+}
+
+.footer-bottom{
+    padding: 20px;
+    margin-top: 20px;
+    background-color:#00ffff;
+}
+
+.bg-light {
+    background-color: #00ffff!important;
+}
+.fontColor{
+    color:red;
+}
