@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use App\Models\Division;
 use App\Models\District;
+use App\Notifications\VerifyRegistration;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -80,19 +82,26 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function register(Request $request)
     {
-        return User::create([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'username' => str_slug($data['first_name'].$data['last_name']),
-            'division_id' => $data['division_id'],
-            'district_id' => $data['district_id'],
-            'phone_no' => $data['phone_no'],
-            'street_address' => $data['street_address'],
+        $user =  User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'username' => str_slug($request->first_name.$request->last_name),
+            'division_id' => $request->division_id,
+            'district_id' => $request->district_id,
+            'phone_no' => $request->phone_no,
+            'street_address' => $request->street_address,
             'ip_address' => request()->ip(),
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'remember_token' => str_random(50),
+            'status' => 0,
         ]);
+
+        $user->notify(new VerifyRegistration($user,$user->remember_token));
+        session()->flash('success','A confirmation mail has sent to you...please check and verify your email address.');
+        return redirect('/');
+
     }
 }

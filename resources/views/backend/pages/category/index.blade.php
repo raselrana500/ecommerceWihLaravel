@@ -18,28 +18,28 @@
                 <th>Parent_id</th>
                 <th>Action</th>
             </tr>
-            @foreach ($categories as $category)
+            @foreach ($categories as $row)
             <tr>
                 
-                <td>{{ $category->id }}</td>
-                <td>{{ $category->name }}</td>
+                <td>{{ $row->id }}</td>
+                <td>{{ $row->name }}</td>
                 <td>
-                  <img src="{!! asset('images/categories/'.$category->image) !!}"alt="img">
+                  <img src="{{ asset('public/images/categories/'.$row->image) }}" alt="images" width="100" />
                 </td>
                 
-                <td>{{ $category->description }}</td>
+                <td>{{ $row->description }}</td>
                 <td>
-                  @if ($category->parent_id == NULL)
+                  @if ($row->parent_id == NULL)
                     Primary Category
                   @else
-                  {{ $category->parentCatName->name }}                      
+                  {{ $row->parentCatName->name }}                      
                   @endif
                 </td>
                 
                 <td>
                   <a class="btn btn-success" href="">Show</a>
-                  <a class="btn btn-info" href="{{ route('admin.pages.category.edit',$category->id) }}">Edit</a>
-                  <a class="btn btn-danger" href="{{ route('admin.pages.category.delete',$category->id) }}">Delete</a>
+                  <a class="btn btn-info" href="{{ route('admin.pages.category.edit',$row->id) }}">Edit</a>
+                  <a class="btn btn-danger" href="{{ route('admin.pages.category.delete',$row->id) }}">Delete</a>
                 </td>
                  
                   
@@ -48,15 +48,9 @@
         </table>
       </div>
     </div>
-    
+    </div> 
   <!-- content-wrapper ends -->
   <!-- partial:partials/_footer.html -->
-  <footer class="footer">
-    <div class="container-fluid clearfix">
-      <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-      <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
-    </div>
-  </footer>
+  @include('backend.partials.footer')
   <!-- partial -->
-</div>
 @endsection

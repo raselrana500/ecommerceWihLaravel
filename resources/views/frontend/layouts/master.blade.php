@@ -4,7 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laravel Ecommerce Project</title>
+    <title>
+        @yield('title','Laravel Ecommerce Project')
+    </title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('frontend.partials.styles')
 </head>
 
@@ -13,7 +16,12 @@
     {{-- Navbar --}}
     @include('frontend.partials.navbar')
 
+        
+        {{-- include messages file --}}
+        @include('Frontend.partials.messagess')
+
         {{-- sidebar & content --}}
+
         @yield('content')
 
     {{-- footer --}}
@@ -23,6 +31,7 @@
     </div>
 
     @include('frontend.partials.scripts')
+    @yield('scripts')
 </body>
 
 </html>

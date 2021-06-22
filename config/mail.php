@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,9 +56,13 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'raselrana501.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'raselrana501@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'Laravel Ecommerce Site'),
     ],
+
+    // Mail::send('emails.activation', $data, function($message) use ($email, $subject) {
+    //     $message->to($email)->subject($subject);
+    // });
 
     /*
     |--------------------------------------------------------------------------

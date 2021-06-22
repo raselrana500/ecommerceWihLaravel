@@ -55,7 +55,7 @@
                         <div class="form-group row">
                             <label for="division_id" class="col-md-4 col-form-label text-md-right mt-2">{{ __('Division') }}</label>
                             <div class="col-md-6">
-                                <select class="form-control" name="division_id">
+                                <select class="form-control" name="division_id"  id="division_id">
                                     <option value="">Please select your Division</option>
                                     @foreach ($divisions as $division)
                                         <option value="{{ $division->id }}">
@@ -69,13 +69,8 @@
                         <div class="form-group row">
                             <label for="district_id" class="col-md-4 col-form-label text-md-right mt-2">{{ __('District') }}</label>
                             <div class="col-md-6">
-                                <select class="form-control" name="district_id">
-                                    <option value="">Please select your District</option>
-                                    @foreach ($districts as $district)
-                                        <option value="{{ $district->id }}">
-                                            {{ $district->name}}
-                                        </option>
-                                    @endforeach
+                                <select class="form-control" name="district_id"  id="district-area">
+                                    
                                 </select>
                             </div>
                         </div>
@@ -143,4 +138,24 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script src="{{ asset('public/js/jquery-3.6.0.min.js')  }}"></script>
+    <script>
+    $("#division_id").change(function(){
+        var division =  $("#division_id").val();
+        $("#district-area").html("");
+        var option = "";
+        $.get("http://localhost/ecommerce/get-districts/"+division,
+        function( data ){
+              data = JSON.parse(data)
+              data.forEach(function(element){
+                  option += "<option value='"+ element.id +"'>"+ element.name +"</option>";
+              });
+              $("#district-area").html(option);
+        });
+    })
+    
+    </script>
 @endsection

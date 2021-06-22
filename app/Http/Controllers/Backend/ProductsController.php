@@ -10,13 +10,19 @@ use Image;
 
 class ProductsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
+    
     public function index(){
         $products=product::orderBy('id','desc')->get();
         return view('backend.pages.product.index')->with('products',$products);
     }
     public function edit($id){
         $product =product::find($id);
-        return view('backend.pages.product.edit')->with('product',$product);
+        return view('backend.pages.product.edit',compact('product'));
     }
     public function create(){
         return view('backend.pages.product.create');
@@ -29,6 +35,8 @@ class ProductsController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'quantity' => 'required|numeric',
+            'category_id' => 'required|numeric',
+            'brand_id' => 'required|numeric',
         ]);
 
 
@@ -39,8 +47,8 @@ class ProductsController extends Controller
         $product->price = $request->price;
         $product->quantity = $request->quantity;
         $product->slug=str_slug($product->title);
-        $product->category_id=1;
-        $product->brand_id=1;
+        $product->category_id=$request->category_id;;
+        $product->brand_id=$request->brand_id;;
         $product->admin_id=1;
         $product->save();
 
@@ -90,6 +98,8 @@ class ProductsController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'quantity' => 'required|numeric',
+            'category_id' => 'required|numeric',
+            'brand_id' => 'required|numeric',
         ]);
 
 
@@ -98,12 +108,27 @@ class ProductsController extends Controller
         $product->title = $request->title;
         $product->description = $request->description;
         $product->price = $request->price;
-        $product->quantity = $request->quantity;
+        $product->quantity = $request->quantity;        
+        $product->category_id=$request->category_id;;
+        $product->brand_id=$request->brand_id;;
         $product->slug=str_slug($product->title);
+        
         $product->save();
+        // if (count($request->product_image)>0) {
+        //     foreach ($request->product_image as $image) {
+        //         $img = time().'.'. $image->getClientOriginalExtension();
+        //         $location = public_path('images/products/'.$img);
+        //         Image::make($image)->resize(175, 255)->save($location);
+
+        //         $product_image = new ProductImage();
+        //         $product_image -> product_id = $product->id;
+        //         $product_image -> image = $img;
+        //         $product_image -> save();
+        //     }
+        // }
         if ($product->save()) {
             $notification = array(
-                'message' => 'Product Update successfully!',
+                'message' => 'Product Updated successfully!',
                 'alert-type' => 'success'
             );
             return redirect()->back()->with($notification);
@@ -112,7 +137,8 @@ class ProductsController extends Controller
         }
 
        
-    }
+    
+}
     public function Delete($id){
         $product=product::find($id);
         if(!is_null($product)){

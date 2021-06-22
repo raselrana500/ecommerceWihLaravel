@@ -27,6 +27,32 @@
             <label><strong>Quantity</strong></label>
             <input type="number" name="quantity" value="{{ $product->quantity }}" class="form-control"  placeholder="Enter Quantity">
           </div>
+
+
+          <div class="form-group ">
+            <label><strong>Select Category</strong></label>
+            <select class="form-control" name="category_id">
+              <option value="">Please select a Category</option>
+              @foreach(App\Models\category::orderBy('name','asc')->where('parent_id',NULL)->get() as $parent)
+              <option value="{{ $parent->id }}" {{ $parent->id == $product->category->id ? 'selected' : '' }}>{{ $parent->name }}</option>
+                @foreach(App\Models\category::orderBy('name','asc')->where('parent_id',$parent->id)->get() as $child)
+                <option value="{{ $child->id }}" {{ $child->id == $product->category->id ? 'selected' : '' }}> -----------> {{ $child->name }}</option>
+                @endforeach
+              @endforeach
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label><strong>Select Brand</strong></label>
+            <select class="form-control" name="brand_id">
+              <option value="">Please select a Brand</option>
+              @foreach(App\Models\brand::orderBy('name','asc')->get() as $br)
+                <option value="{{ $br->id }}" {{ $br->id == $product->brand->id ? 'selected' : ''}} >{{ $br->name }}</option>
+              @endforeach
+            </select>
+          </div>
+
+
           <div class="form-group">
             <label><strong>Image</strong></label>
             <div class="row">
@@ -61,5 +87,5 @@
     </div>
   </footer>
   <!-- partial -->
-</div>
+
 @endsection

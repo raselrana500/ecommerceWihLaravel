@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Division extends Model
 {
+    public $fillable = [
+        'name',
+        'priority'
+    ];
     public function districts(){
         return $this->hasManey(District::class);
     }

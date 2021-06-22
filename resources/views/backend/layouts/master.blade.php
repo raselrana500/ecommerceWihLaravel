@@ -16,7 +16,13 @@
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('public/admin/assets/css/shared/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.24/datatables.min.css"/>
+ 
+
+
     <!-- endinject -->
+
+    
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('public/admin/assets/css/demo_1/style.css') }}">
     <!-- End Layout styles -->
@@ -46,15 +52,16 @@
     <!-- End plugin js for this page-->
     <!-- inject:js -->
     <script src="{{ asset('public/admin/assets/js/shared/off-canvas.js') }}"></script>
-    <script src="{{ asset('public/admin/assets/js/shared/misc.js') }}"></script>
+    <!-- <script src="{{ asset('public/admin/assets/js/shared/misc.js') }}"></script> -->
+    
     <!-- endinject -->
     <!-- Custom js for this page-->
     <script src="{{ asset('public/admin/assets/js/demo_1/dashboard.js') }}"></script>
     <!-- End custom js for this page-->
     <script src="{{ asset('public/admin/assets/js/shared/jquery.cookie.js') }}" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous"></script>
       <script>
         @if(Session::has('message'))
@@ -77,6 +84,12 @@
                   break;
             }
           @endif
+      </script>
+      <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.24/datatables.min.js"></script>
+      <script>
+        $(document).ready(function() {
+          $('#dataTable').DataTable();
+        } );
       </script>
   </body>
 </html>

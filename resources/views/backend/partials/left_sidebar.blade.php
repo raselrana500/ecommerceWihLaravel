@@ -7,15 +7,14 @@
             <div class="dot-indicator bg-success"></div>
           </div>
           <div class="text-wrapper">
-            <p class="profile-name">Allen Moreno</p>
-            <p class="designation">Premium user</p>
+            <p class="profile-name">Welcome <br/>{{ auth::user()->name }}</p>
           </div>
         </a>
       </li>
       <li class="nav-item nav-category">Main Menu</li>
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
-          <i class="menu-icon typcn typcn-document-text"></i>
+        <a class="nav-link" href="{{ route('admin.index') }}">
+          <!-- <i class="menu-icon typcn typcn-document-text"></i> -->
           <span class="menu-title">Dashboard</span>
         </a>
       </li>
@@ -36,11 +35,42 @@
           </ul>
         </div>
       </li>
+      </li>
+      <!-- orders -->
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" class="collapsed" href="#ui-order" aria-expanded="false" aria-controls="ui-order">
+          <i class="menu-icon typcn typcn-coffee"></i>
+          <span class="menu-title">Orders</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-order">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('admin.orders') }}">Manage Orders</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" class="collapsed" href="#ui-sliders" aria-expanded="false" aria-controls="ui-sliders">
+          <i class="menu-icon typcn typcn-coffee"></i>
+          <span class="menu-title">Sliders</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-sliders">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('admin.sliders') }}">Manage Sliders</a>
+            </li>
+          </ul>
+        </div>
+      </li>
 
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#ui-category" aria-expanded="false" aria-controls="ui-category">
           <i class="menu-icon typcn typcn-coffee"></i>
-          <span class="menu-title">Category</span>
+          <span class="menu-title">category</span>
           <i class="menu-arrow"></i>
         </a>
         <div class="collapse" id="ui-category">
@@ -55,6 +85,25 @@
         </div>
       </li>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#ui-brand" aria-expanded="false" aria-controls="ui-brand">
+          <i class="menu-icon typcn typcn-coffee"></i>
+          <span class="menu-title">brand</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-brand">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('admin.brand.create') }}">Add brand</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('admin.pages.brand.index') }}">Manage brand</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      
       <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" href="#ui-division" aria-expanded="false" aria-controls="ui-division">
           <i class="menu-icon typcn typcn-coffee"></i>
@@ -74,12 +123,12 @@
       </li>
       
       <li class="nav-item">
-        <a class="nav-link" data-toggle="collapse" href="#ui-division" aria-expanded="false" aria-controls="ui-division">
+        <a class="nav-link" data-toggle="collapse" href="#ui-districts" aria-expanded="false" aria-controls="ui-districts">
           <i class="menu-icon typcn typcn-coffee"></i>
           <span class="menu-title">Districts</span>
           <i class="menu-arrow"></i>
         </a>
-        <div  id="ui-division">
+        <div  id="ui-districts">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item">
               <a class="nav-link" href="{{ route('admin.districts.create') }}">Add Districts</a>
@@ -89,6 +138,18 @@
             </li>
           </ul>
         </div>
+      </li>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="#ui-division">
+          <form class="form-inline" action="{{ route('admin.logout') }}" method="post">
+          @csrf
+
+          <input type="submit" value="Logout Now" class="btn btn-danger">
+
+          </form>
+        </a>
       </li>
 
     </ul>

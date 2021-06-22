@@ -21,8 +21,9 @@
           </div>
 
           <div class="form-group">
-            <label></label><strong>Parent Category</strong></label>
+            <label><strong>Parent Category</strong></label>
             <select class="form-control" name="parent_id">
+              <option value="">Select a Category</option>
               @foreach ($main_categories as $category)
                   <option value="{{ $category->id }}">{{ $category->name }}</option>
               @endforeach
@@ -36,18 +37,12 @@
           </div>
 
         </div>
-          <p><button type="submit" class="btn btn-primary">Add Category</button></p>
+          <p class="ml-4"><button type="submit" class="btn btn-primary">Add Category</button></p>
         </form>
       </div>
     </div>
   <!-- content-wrapper ends -->
   <!-- partial:partials/_footer.html -->
-   <footer class="footer">
-    <div class="container-fluid clearfix">
-      <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-      <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
-    </div>
-  </footer>
+  @include('backend.partials.footer')
   <!-- partial -->
-</div>
 @endsection

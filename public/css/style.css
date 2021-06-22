@@ -1,12 +1,24 @@
+html{
+    height: 100%;
+}
+body{
+    position: relative;
+    min-height: 100%;
+    padding-bottom: 5rem;
+}
 .mr-auto,.mx-auto {
     margin-right: auto!important;
     margin-top: 14px;
 }
-
+.pointer{
+    cursor: pointer;
+}
+.marginBottom{
+    margin-bottom: 50px;
+}
 .margin-top-20{
     margin-top: 20px;
 }
-
 .featured-img{
     min-height: 200px;
 }
@@ -25,6 +37,10 @@
     padding: 20px;
     margin-top: 20px;
     background-color:#00ffff;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
 }
 
 .bg-light {
@@ -32,4 +48,18 @@
 }
 .fontColor{
     color:red;
+}
+
+/*product css*/
+.product-item{
+    background:#00ffff;
+}
+/*End product css*/
+.child-rows{
+   padding-left: 20px;
+   border-left: 1px solid #dfdfdf;
+   background: #ffffff; 
+}
+.child-rows a.list-group-item{
+    border-left: 0px!important;
 }

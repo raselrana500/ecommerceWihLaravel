@@ -9,6 +9,12 @@ use App\Models\Division;
 
 class DistrictsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
+    
     public function index(){
         $district=District::orderBy('division_id','asc')->get();
         return view('backend.pages.districts.index')->with('districts',$district);

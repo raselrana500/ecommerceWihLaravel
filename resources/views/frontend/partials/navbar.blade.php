@@ -1,5 +1,5 @@
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixted">
         <div class="container">
             <a class="navbar-brand" href="{{ route('index') }}">LaraEcommerce</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -7,24 +7,24 @@
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent"  style="margin-top:20px;">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ route('index') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products') }}">Products</a>
+                        <a class="nav-link" href="{{ route('products') }}">All Products</a>
                     </li>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('contact') }}">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <form class="d-flex">
+                    <li class="nav-item" style="padding-left:100px;">
+                        <form class="d-flex" action="{{ route('search')}}" method="get">
                             <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                                 <button class="btn btn-outline-success" type="submit">Search</button> -->
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" placeholder="Search">
+                                <input type="text" class="form-control" name="search" placeholder="Search Product">
                                 <div class="input-group-append">
                                     <button class="btn btn-success" type="submit"><i class="fa fa-search"></i></button>
                                 </div>
@@ -49,6 +49,18 @@
 
                 </ul>
                 <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                        <a href="{{ route('carts') }}">
+                            <button class="btn btn-warning">
+                                <span class="badge alert-warning" id="totalItems">
+                                    {{ App\Models\Cart::totalItems() }}
+                                </span>
+                                <span>
+                                <i class="fa fa-shopping-cart" style="color:#ffffff;"></i>
+                                </span>
+                            </button>
+                        </a>
+                </li>
                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -59,11 +71,17 @@
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <img src="{{ App\Helpers\ImageHelper::getAvatarImage(Auth::user()->id)  }}" class="img rounded-circle" style="width:30px;height:30px;" />
                             {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            
+                        <a class="dropdown-item" href="{{ route('user.dashboard') }}">
+                                {{ __('My Dashboard') }}
+                            </a>    
+                        
+                        <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
