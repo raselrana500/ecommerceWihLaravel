@@ -68,8 +68,9 @@ class ProductsController extends Controller
         // }
 
         if (count($request->product_image)>0) {
+            $i = 0;
             foreach ($request->product_image as $image) {
-                $img = time().'.'. $image->getClientOriginalExtension();
+                $img = time().$i.'.'. $image->getClientOriginalExtension();
                 $location = public_path('images/products/'.$img);
                 Image::make($image)->resize(175, 255)->save($location);
 
@@ -77,6 +78,7 @@ class ProductsController extends Controller
                 $product_image -> product_id = $product->id;
                 $product_image -> image = $img;
                 $product_image -> save();
+                $i++;
             }
         }
         if ($product->save()) {
@@ -143,6 +145,14 @@ class ProductsController extends Controller
         $product=product::find($id);
         if(!is_null($product)){
             $product->delete();
+        }
+        //Delete all images
+        foreach($product->images as $img){
+            $file_name = $img->image;
+            if(file_exists("public/images/products/".$file_name)){
+                unlink('public/images/products/'.$file_name);
+            }
+            $img->delete();
         }
         session()->flash('success','Product has deleted successfully !!');
         return redirect()->back();

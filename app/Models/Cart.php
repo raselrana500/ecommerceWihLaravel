@@ -30,7 +30,14 @@ class Cart extends Model
      * @return integer total item
      */
     public static function totalItems(){
-        $carts = Cart::totalCarts();
+        if(Auth::check()){
+            $carts = Cart::Where('user_id',Auth::id())
+            ->orWhere('ip_address',request()->ip())
+            ->where('order_id',NULL)           
+            ->get();
+        }else{
+            $carts =  Cart::Where('ip_address',request()->ip())->where('order_id',NULL)->get();
+        }
         $total_item = 0;
         foreach($carts as $cart){
             $total_item += $cart->product_quantity;

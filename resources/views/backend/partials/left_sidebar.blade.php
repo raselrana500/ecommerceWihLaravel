@@ -13,12 +13,6 @@
       </li>
       <li class="nav-item nav-category">Main Menu</li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.index') }}">
-          <!-- <i class="menu-icon typcn typcn-document-text"></i> -->
-          <span class="menu-title">Dashboard</span>
-        </a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" data-toggle="collapse" class="collapsed" href="#ui-product" aria-expanded="false" aria-controls="ui-product">
           <i class="menu-icon typcn typcn-coffee"></i>
           <span class="menu-title">Product</span>

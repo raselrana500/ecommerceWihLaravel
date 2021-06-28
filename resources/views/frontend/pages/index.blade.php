@@ -53,7 +53,7 @@
                                         </div>
                                 </div>
                             <div class="widget bg mt-4">
-                            <h3>Featured Products</h3>
+                            <h3 style="background:#4ec3c3;color:white;">Featured Products</h3>
                                 @include('frontend.pages.product.partials.all_products')
                             </div>
                             

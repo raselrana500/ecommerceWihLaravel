@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Models\Order;
+use PDF;
 
 class OrdersController extends Controller
 {
@@ -55,5 +56,20 @@ class OrdersController extends Controller
         $order->save();
         session()->flash('success','Order paid status changed..!');
         return back();
+    }
+
+    public function chargeUpdate(Request $request,$id){
+        $order = Order::find($id);
+        $order->shipping_charge = $request->shipping_charge;
+        $order->custom_discount = $request->custom_discount;
+        $order->save();
+        session()->flash('success','Shipping charge and Discount has updated!!');
+        return back();
+    }
+
+    public function generateInvoice($id){
+        $order = Order::find($id);
+        $pdf = PDF::loadView('backend.pages.orders.invoice', compact('order'));
+        return $pdf->stream('invoice.pdf');
     }
 }

@@ -6,6 +6,7 @@
     <div class="card">
       <div class="card-header">
         <strong>View Order #LE{{ $order->id }}</strong> 
+        <a href="{{ route('admin.order.invoice',$order->id) }}" class="btn btn-success">Generate Invoice to pdf</a>
       </div>
       <div class="card-body">
         @include('backend.partials.messagess')
@@ -113,6 +114,20 @@
       </form>
         </div>
       </div>
+      
+      <br>
+      <form action="{{ route('admin.order.charge',$order->id)  }}" method="post" class="form-inline mr-2 mt-2">
+        @csrf
+        <br>
+        <label for="" class="mr-2 ml-2 btn btn-info">Shipping Cost</label>
+        <input type="number" value="{{ $order->shipping_charge }}" name="shipping_charge">
+        <br>
+        <label for=""class="mr-2 ml-2 btn btn-info">Custom Discount</label>
+        <input type="number" value="{{ $order->custom_discount }}" name="custom_discount">
+        <br>
+        <input type="submit" value="Update" class="btn btn-primary ml-2">
+      </form>
+      <hr>
     </div>
     </div> 
   <!-- content-wrapper ends -->

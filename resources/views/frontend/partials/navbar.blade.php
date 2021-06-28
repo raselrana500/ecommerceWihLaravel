@@ -1,7 +1,10 @@
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixted">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-light navbar-fixted sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('index') }}">LaraEcommerce</a>
+            <a class="navbar-brand" href="{{ route('index') }}">
+
+            <img src="{{ asset('public/images/logo.png') }}" width="200px">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -9,15 +12,15 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent"  style="margin-top:20px;">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('index') }}">Home</a>
+                    <!-- <li class="nav-item {{ route::is('index') ? 'active' : '' }}">
+                        <a class="nav-link" aria-current="page" href="{{ route('index') }}">Home</a>
+                    </li> -->
+                    <li class="nav-item {{ route::is('products') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('products') }}"  style="color:white;">All Products</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('products') }}">All Products</a>
                     </li>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('contact') }}">Contact</a>
+                    <li class="nav-item {{ route::is('contact') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('contact') }}" style="color:white;">Contact</a>
                     </li>
                     <li class="nav-item" style="padding-left:100px;">
                         <form class="d-flex" action="{{ route('search')}}" method="get">
@@ -63,10 +66,10 @@
                 </li>
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link ml-2" href="{{ route('login') }}" style="color:white;">{{ __('Login') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        <a class="nav-link ml-2" href="{{ route('register') }}" style="color:white;">{{ __('Register') }}</a>
                     </li>
                 @else
                     <li class="nav-item dropdown">

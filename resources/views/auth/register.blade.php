@@ -147,7 +147,8 @@
         var division =  $("#division_id").val();
         $("#district-area").html("");
         var option = "";
-        $.get("http://localhost/ecommerce/get-districts/"+division,
+        var url = "{{ url('/') }}";
+        $.get(url+"/get-districts/"+division,
         function( data ){
               data = JSON.parse(data)
               data.forEach(function(element){
